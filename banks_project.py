@@ -31,6 +31,13 @@ def extract(url, table_attribs):
     information from the website and save it to a data frame. The
     function returns the data frame for further processing. '''
 
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.content, 'html.parser')
+
+        
+
     return df
 
 def transform(df, csv_path):
