@@ -34,10 +34,10 @@ def extract(url, table_attribs):
     response = requests.get(url)
 
     if response.status_code == 200:
-        soup = BeautifulSoup(response.content, 'html.parser')
-
-        
-
+        soup = BeautifulSoup(response.content, 'html.parser') # read the HTML page
+        h2 = soup.find('h2',string='By market capitalization') # Find the required heading
+        table = h2.find_next_sibling('table') # Find the table coming after the heading
+        df = pd.read_html(str(table)) # Convert the table into a dataframe
     return df
 
 def transform(df, csv_path):
